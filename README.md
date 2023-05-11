@@ -7,4 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-Ini adalah aplikasi untuk kebutuhan Absensi sekolah SMA. Aplikasi Absensi ini menggunakan Handphone sebagai perangkat absennya, dan menggunakan fitur kamera. Dimana kamera di arahkan ke QR Code yang telah di cetak dalam bentuk kartu (QR Code setiap siswa di buat di dalam aplikasi ini).  Aplikasi ini di bangun menggunakan Laravel 10 dengan versi PHP minimal 8.1.0.
+Ini adalah aplikasi untuk kebutuhan Absensi sekolah SMA. Aplikasi Absensi ini menggunakan Handphone sebagai perangkat absennya, dan menggunakan fitur kamera. Dimana kamera di arahkan ke QR Code yang telah di cetak dalam bentuk kartu (QR Code setiap siswa di buat di dalam aplikasi ini).  
+
+Aplikasi ini di bangun menggunakan Laravel 10 dengan versi PHP minimal 8.1.0.
