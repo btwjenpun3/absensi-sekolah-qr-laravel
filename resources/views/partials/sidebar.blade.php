@@ -41,8 +41,8 @@
           </p>
         </a>        
       </li>     
-      <li class="nav-item {{ ($title === 'Daftar Murid') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}">
+      <li class="nav-item {{ ($title === 'Daftar Murid') ? 'menu-open' : '' }}{{ ($title === 'Input Murid') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}{{ ($title === 'Input Murid') ? 'active' : '' }}">
           <i class="nav-icon fas fa-address-book"></i>
           <p>
             Murid
@@ -51,19 +51,38 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+            <a href="/input-murid" class="nav-link {{  ($title === 'Input Murid') ? 'active' : '' }}">              
               <p>Input Murid</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/daftar-murid" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}">
-              <i class="far fa-circle nav-icon"></i>
+            <a href="/daftar-murid" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}">              
               <p>Daftar Murid</p>
             </a>
           </li>          
         </ul>
-      </li>            
+      </li>
+      <li class="nav-item {{ ($title === 'Data Kelas') ? 'menu-open' : '' }}{{ ($title === 'Data Tahun') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ ($title === 'Data Kelas') ? 'active' : '' }}{{ ($title === 'Data Tahun') ? 'active' : '' }}">
+          <i class="nav-icon fas fa-book"></i>
+          <p>
+            Data Master
+            <i class="fas fa-angle-left right"></i>            
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="/kelas" class="nav-link {{ ($title === 'Data Kelas') ? 'active' : '' }}">              
+              <p>Kelas</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/tahun" class="nav-link {{ ($title === 'Data Tahun') ? 'active' : '' }}">              
+              <p>Tahun</p>
+            </a>
+          </li>          
+        </ul>
+      </li>               
     </ul>
 </nav>
 <!-- /.sidebar-menu -->

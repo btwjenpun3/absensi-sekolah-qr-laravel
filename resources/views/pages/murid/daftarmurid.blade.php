@@ -15,7 +15,7 @@
 <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">          
+        <div class="col-12">         
 
           <div class="card">
             <div class="card-header">
@@ -30,26 +30,25 @@
                   <th>NIS</th>
                   <th>Nama Lengkap</th>
                   <th>Kelas</th>
+                  <th>Tahun</th>
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
+                @foreach ($murid as $m) 
                 <tr>
                   <td>1</td>
-                  <td>333225555552222
+                  <td>{{ $m->nis }}
                   </td>
-                  <td>Muhamad Helmi</td>
-                  <td>XI-3</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>333225555551111
+                  <td>{{ $m->nama }}</td>
+                  <td>{{ $m->kelas }}</td>
+                  <td>{{ $m->tahun }}</td>
+                  <td class="text-center"><a href="/detail-murid/{{ $m->id }}"><button type="submit" class="btn btn-success">
+                        <span>Detail</span>
+                      </button></a>
                   </td>
-                  <td> Muhamad Faisal</td>
-                  <td>X-1</td>
-                  <td></td>
                 </tr>
+                @endforeach                
                 </tbody> 
                 <tfoot>                  
                 <tr>
@@ -57,6 +56,7 @@
                     <th>NIS</th>
                     <th>Nama Lengkap</th>
                     <th>Kelas</th>
+                    <th>Tahun</th>
                     <th></th>
                 </tr>                
                 </tfoot>
