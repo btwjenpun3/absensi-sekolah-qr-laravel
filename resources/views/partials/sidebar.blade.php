@@ -2,7 +2,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        <img src="/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
         <a href="#" class="d-block">Alexander Pierce</a>
@@ -41,8 +41,8 @@
           </p>
         </a>        
       </li>     
-      <li class="nav-item {{ ($title === 'Daftar Murid') ? 'menu-open' : '' }}{{ ($title === 'Input Murid') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}{{ ($title === 'Input Murid') ? 'active' : '' }}">
+      <li class="nav-item {{ ($title === 'Daftar Murid') ? 'menu-open' : '' }}{{ ($title === 'Input Murid') ? 'menu-open' : '' }}{{ ($title === 'Detail Murid') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}{{ ($title === 'Input Murid') ? 'active' : '' }}{{ ($title === 'Detail Murid') ? 'active' : '' }}">
           <i class="nav-icon fas fa-address-book"></i>
           <p>
             Murid
@@ -51,15 +51,15 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="/input-murid" class="nav-link {{  ($title === 'Input Murid') ? 'active' : '' }}">              
-              <p>Input Murid</p>
+            <a href="/daftar-murid" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}{{ ($title === 'Detail Murid') ? 'active' : '' }}">              
+              <p>Daftar Murid</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="/daftar-murid" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}">              
-              <p>Daftar Murid</p>
+            <a href="/input-murid" class="nav-link {{  ($title === 'Input Murid') ? 'active' : '' }}">              
+              <p>Input Murid</p>
             </a>
-          </li>          
+          </li>                    
         </ul>
       </li>
       <li class="nav-item {{ ($title === 'Data Kelas') ? 'menu-open' : '' }}{{ ($title === 'Data Tahun') ? 'menu-open' : '' }}">
@@ -82,7 +82,15 @@
             </a>
           </li>          
         </ul>
-      </li>               
-    </ul>
+      </li>                     
+    </ul>      
 </nav>
+<div class="mt-4 ml-4 fixed-bottom">
+  <form action="/keluar" method="post"> 
+    @csrf        
+    <p>
+      <button class="btn btn-outline-danger" type="submit">Keluar</button>          
+    </p>               
+  </form> 
+</div>
 <!-- /.sidebar-menu -->

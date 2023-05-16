@@ -22,7 +22,7 @@
               <h3 class="card-title">Data di bawah adalah data dari keseluruhan murid</h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body">              
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -35,14 +35,17 @@
                 </tr>
                 </thead>
                 <tbody>
+                @php 
+                $no=1;
+                @endphp
                 @foreach ($murid as $m) 
                 <tr>
-                  <td>1</td>
+                  <td>{{ $no++; }}</td>
                   <td>{{ $m->nis }}
                   </td>
                   <td>{{ $m->nama }}</td>
-                  <td>{{ $m->kelas }}</td>
-                  <td>{{ $m->tahun }}</td>
+                  <td>{{ $m->kelas->kelas }}</td>
+                  <td>{{ $m->tahun->tahun }}</td>
                   <td class="text-center"><a href="/detail-murid/{{ $m->id }}"><button type="submit" class="btn btn-success">
                         <span>Detail</span>
                       </button></a>
@@ -60,7 +63,7 @@
                     <th></th>
                 </tr>                
                 </tfoot>
-              </table>
+              </table>              
             </div>
             <!-- /.card-body -->
           </div>
@@ -71,7 +74,7 @@
       <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
-  </section>
+  </section>  
   <!-- /.content -->
 <!-- /.content -->
 @endsection

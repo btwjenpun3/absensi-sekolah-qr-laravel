@@ -23,10 +23,25 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Masuk untuk memulai sesi kamu</p>
-
-      <form action="" method="post">
+      @error('username')
+        <div class="alert alert-danger" role="alert">
+          {{ $message }}
+        </div>
+      @enderror
+      @error('password')
+        <div class="alert alert-danger" role="alert">
+          {{ $message }}
+        </div>
+      @enderror
+      @if(session()->has('loginError'))                             
+        <div class="alert alert-danger" role="alert">
+          {{ session('loginError') }}
+        </div>
+      @endif
+      <form action="/" method="post">
+        @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nama">
+          <input type="text" class="form-control @error('username') is-invalid @enderror" placeholder="Username" name="username" autofocus required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -34,7 +49,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -56,8 +71,8 @@
           </div>
           <!-- /.col -->
         </div>
-      </form>     
-
+      </form>
+      <br>
       <p class="mb-1">
         <a href="forgot-password.html">Lupa password</a>
       </p>     
