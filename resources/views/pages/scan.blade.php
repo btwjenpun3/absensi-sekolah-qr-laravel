@@ -11,6 +11,16 @@
       <div class="row">       
         <!-- /.col-md-6 -->
         <div class="col-lg-6">
+          @if(session()->has('success'))                             
+          <div class="alert alert-success" role="alert">
+            Absensi berhasil.
+          </div>
+          @endif
+          @if(session()->has('fail'))                             
+          <div class="alert alert-danger" role="alert">
+            Gagal. Murid sudah melakukan absen hari ini!
+          </div>
+          @endif
           <div class="card">
             <div class="card-header">
               <h5 class="m-0">Menu Scan QR</h5>
@@ -57,9 +67,9 @@
                                          
                                         if(selectedDeviceId == null){
                                             if(videoInputDevices.length > 1){
-                                                selectedDeviceId = videoInputDevices[1].deviceId
-                                            } else {
                                                 selectedDeviceId = videoInputDevices[0].deviceId
+                                            } else {
+                                                selectedDeviceId = videoInputDevices[1].deviceId
                                             }
                                         }
                                          
@@ -89,8 +99,8 @@
                                                     snd.play();
                                                  
                                                     if(codeReader){
-                                                        var timer = setTimeout(function() {
-                                                        window.location.href=(result.text);
+                                                        setTimeout(function() {
+                                                        window.location.href=('/scan-qr/' + encodeURIComponent(result.text));
                                                         }, 600);
                                                         codeReader.reset()
                                                     }
