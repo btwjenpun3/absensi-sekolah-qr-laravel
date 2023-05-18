@@ -43,6 +43,9 @@ Route::get('/scan-qr', [AbsensiController::class, 'index'])->middleware('auth');
 // Proses Scan QR
 Route::get('/scan-qr/{absensi}', [AbsensiController::class, 'store'])->middleware('auth');
 
+// Proses Absensi Otomatis Ganti Hari
+Route::get('/auto-run', [AbsensiController::class, 'gantiHari']);
+
 // Menuju Halaman Input Murid
 Route::get('/input-murid', [MuridController::class, 'index_input'])->middleware('auth');
 
@@ -52,8 +55,14 @@ Route::post('/input-murid-proses', [MuridController::class, 'store'])->middlewar
 // Menuju Halaman Daftar Murid
 Route::get('/daftar-murid', [MuridController::class, 'index_daftar'])->middleware('auth');
       
+// Fungsi Hapus Murid
+Route::post('/detail-murid/hapus/{murid}', [MuridController::class, 'destroy'])->middleware('auth');
+
 // Menuju Halaman Detail Murid
-Route::get('/detail-murid/{murid}', [MuridController::class, 'show_detail'])->middleware('auth');
+Route::get('/detail-murid/{murid}', [MuridController::class, 'show_detail']);
+
+// // Fungsi Menampilkan Absensi Dengan Range Tertentu
+// Route::post('/detail-murid/{id}', [AbsensiController::class, 'show_range'])->middleware('auth');
 
 // Menuju Halaman Data Master Kelas
 Route::get('/kelas', [KelasController::class, 'index'])->middleware('auth');

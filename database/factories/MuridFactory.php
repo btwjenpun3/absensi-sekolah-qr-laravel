@@ -20,9 +20,8 @@ class MuridFactory extends Factory
         return [
             'nis' => $this->faker->unique()->numberBetween(11020201993,11020211993),
             'nama' => $this->faker->name(),            
-            'kelas_id' => $this->faker->numberBetween(1,6),
-            'tahun' => 2023,
-            'waktu_dibuat' => now(),
+            'kelas_id' => 1,
+            'tahun_id' => 1,            
             'created_at' => now(),
             'updated_at' => now()
         ];

@@ -76,11 +76,13 @@ class MuridController extends Controller
     public function show_detail(Murid $murid)
     {
         $kelas = Kelas::get('kelas');
+        $tahun = Tahun::get('tahun');
         return view('pages/murid/detail', [
             "title" => "Detail Murid",
             "titlepage" => "Detail Murid",
             "kelas" => $kelas,
             "murid" => $murid,
+            "tahun" => $tahun,
             "absensi" => Absensi::latest()->where('murid_id', $murid->id)->limit(30)->get(),
             "qr" => QrCode::size(200)->generate($murid->nis)
 
@@ -106,8 +108,13 @@ class MuridController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Murid $murid)
+    public function destroy(Request $request)
     {
-        //
+        $getId = $request->murid;
+
+        // Hapus data Murid sesuai dengan id-nya
+        Murid::where('id', $getId)->delete(); 
+        
+        return redirect('/daftar-murid')->with('deleted', 'Data Murid berhasil di hapus.');    
     }
 }

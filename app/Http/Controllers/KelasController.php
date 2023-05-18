@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Murid;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -10,13 +11,13 @@ class KelasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Murid $murid)
     {
-        $kelas = Kelas::orderBy('kelas')->get();
+        $kelas = Kelas::orderBy('kelas')->get(); 
         return view('pages/master/kelas', [
             "title" => "Data Kelas",
             "titlepage" => "Data Kelas",
-            "kelas" => $kelas
+            "kelas" => $kelas            
         ]);
     }
 

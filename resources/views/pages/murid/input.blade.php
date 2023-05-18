@@ -87,7 +87,7 @@
                     @error('nama')
                       <span class="text-warning">Harap pilih Tahun kembali!</span>
                     @enderror
-                </div>
+                </div>                
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="verifikasi" required>
                   <label class="form-check-label" for="verifikasi">Data di atas sudah benar</label>
@@ -110,5 +110,6 @@
     </div><!-- /.container-fluid -->
   </section>
   <!-- /.content -->
+  <!-- Configure a few settings and attach camera -->  
 
 @endsection

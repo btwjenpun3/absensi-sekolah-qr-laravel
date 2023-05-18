@@ -16,7 +16,11 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">         
-
+          @if(session()->has('deleted'))                             
+          <div class="alert alert-danger" role="alert">
+            Data Murid Berhasil di Hapus!.
+          </div>
+          @endif
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Data di bawah adalah data dari keseluruhan murid</h3>
