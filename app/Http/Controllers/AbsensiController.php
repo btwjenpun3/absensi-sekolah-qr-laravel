@@ -44,10 +44,10 @@ class AbsensiController extends Controller
          
         $verifikasiWaktu = Carbon::now()->format('Y-m-d'); 
         
-        $hariIni = Carbon::now()->locale('id')->format('l');
-        $tanggalHariIni = Carbon::now()->format('d'); 
-        $jamHariIni = Carbon::now()->format('H:i:s'); 
-        $bulanHariIni = Carbon::now()->locale('id')->format('F');
+        $hariIni = Carbon::now()->locale('id')->translatedFormat('l');
+        $tanggalHariIni = Carbon::now()->translatedFormat('d'); 
+        $jamHariIni = Carbon::now()->translatedFormat('H:i:s'); 
+        $bulanHariIni = Carbon::now()->locale('id')->translatedFormat('F');
 
         if($jamHariIni > '07:00:00'){
            $status = 2; // Status terlambat
@@ -70,16 +70,56 @@ class AbsensiController extends Controller
             $absensi->save();
             return redirect('/scan-qr')->with('success','');
         };
-        
-
     }
 
+    public function gantiHari(Absensi $absensi)
+    {
+        
+        $today = Carbon::now()->toDateString();
+
+        $murid = Murid::pluck('id');
+
+        $hariIni = Carbon::now()->locale('id')->translatedFormat('l');
+        $tanggalHariIni = Carbon::now()->translatedFormat('d'); 
+        $jamHariIni = Carbon::now()->translatedFormat('H:i:s'); 
+        $bulanHariIni = Carbon::now()->locale('id')->translatedFormat('F');
+
+        foreach($murid as $m){
+            $data = Absensi::where('murid_id', $m)->whereDate('created_at', $today)->get();
+            if($data->isEmpty()) {
+                $absensi = new Absensi;
+                $absensi->murid_id = $m;
+                $absensi->hari = $hariIni;
+                $absensi->tanggal = $tanggalHariIni;
+                $absensi->bulan = $bulanHariIni;
+                $absensi->jam_absen = $jamHariIni;
+                $absensi->status = 0;                 
+                $absensi->save();                
+            }
+            else 
+            {
+                
+            }
+        }
+    }  
     /**
      * Display the specified resource.
      */
-    public function show(Absensi $absensi)
+    public function show_range(Request $request)
     {
-        //
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+
+        // Lakukan query ke database sesuai dengan startDate dan endDate
+            $data = Absensi::where('murid_id', $request->id)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->get();
+
+            return response()->json($data); 
+
+        // Mengembalikan data dalam format JSON sebagai respons
+        // Simpan hasil query ke dalam variabel $data
+        
     }
 
     /**

@@ -39,6 +39,12 @@
                 </li>
                 <li class="list-group-item">
                   <b>Kehadiran</b> <a class="float-right">98%</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Di Buat</b> <a class="float-right">{{ date('d-m-Y', strtotime($murid->created_at)) }} | {{ date('H:m:s', strtotime($murid->created_at)) }} WIB</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Di Perbarui</b> <a class="float-right">{{ date('d-m-Y', strtotime($murid->updated_at)) }} | {{ date('H:m:s', strtotime($murid->updated_at)) }} WIB</a>
                 </li>                
               </ul>
               <a href="#" class="btn btn-warning btn-block"  data-toggle="modal" data-target="#modalQr"><b>Lihat Kartu</b></a>
@@ -70,7 +76,8 @@
             <div class="card-header p-2">
               <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Absensi</a></li>                
-                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Alat</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -78,19 +85,17 @@
                 <div class="active tab-pane" id="activity">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4">
-                                <form id="searchForm">
-                                    <div class="form-group">
-                                        <label for="startDate">Tanggal Awal</label>
-                                        <input type="date" name="startDate" id="startDate" class="form-control" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="endDate">Tanggal Akhir</label>
-                                        <input type="date" name="endDate" id="endDate" class="form-control" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Cari</button>
-                                </form>
-                            </div>
+                            <div class="col-md-4">                                            
+                                <div class="form-group">
+                                    <label for="startDate">Tanggal Awal</label>
+                                    <input type="date" name="startDate" id="startDate" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="endDate">Tanggal Akhir</label>
+                                    <input type="date" name="endDate" id="endDate" class="form-control" required>
+                                </div>                                    
+                                <button id="searchButton" class="btn btn-primary mb-4">Cari</button>                                                                   
+                            </div>                                
                             <div class="col-md-8">
                               <div id="searchResult"></div>
                             </div>                            
@@ -156,39 +161,27 @@
                           <!-- /.card-body -->
                         </div>
                     </div>                    
-                </div>
-                <!-- /.tab-pane -->
-                <div class="tab-pane" id="timeline">
-                  <!-- The timeline -->
-                  <div class="timeline timeline-inverse">
-                    <!-- timeline time label -->
-                    <div class="time-label">
-                      <span class="bg-danger">
-                        10 Feb. 2014
-                      </span>
-                    </div>                    
-                  </div>
-                </div>
-                <!-- /.tab-pane -->
+                </div>                
 
-                <div class="tab-pane" id="settings">
+                <div class="tab-pane" id="profile">                  
                   <form class="form-horizontal">
-                    <div class="form-group row">
-                      <label for="inputName" class="col-sm-2 col-form-label">NIS</label>
+                    @csrf
+                    <div class="form-group row">                                            
+                      <label for="inputNis" class="col-sm-2 col-form-label">NIS</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="nis" placeholder="NIS" value="{{ $murid->nis }}" disabled>
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="inputEmail" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                      <label for="inputName" class="col-sm-2 col-form-label">Nama Lengkap</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="nama" placeholder="Nama Lengkap" value="{{ $murid->nama }}">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="inputName2" class="col-sm-2 col-form-label">Kelas</label>
+                      <label for="inputKelas" class="col-sm-2 col-form-label">Kelas</label>
                       <div class="col-sm-10">
-                        <select class="form-control @error('nis') is-warning @enderror @error('nama') is-warning @enderror" id="kelas" name="kelas">                      
+                        <select class="form-control" id="kelas" name="kelas">                      
                           @foreach ($kelas as $k)
                           @if($k->kelas === $murid->kelas->kelas)
                           <option selected>{{ $k->kelas }}</option>
@@ -200,34 +193,48 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                      <label for="inputTahun" class="col-sm-2 col-form-label">Tahun</label>
                       <div class="col-sm-10">
-                        <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                        <select class="form-control" id="tahun" name="tahun">                      
+                          @foreach ($tahun as $t)
+                          @if($t->tahun === $murid->tahun->tahun)
+                          <option selected>{{ $t->tahun }}</option>
+                          @else
+                          <option>{{ $t->tahun }}</option>
+                          @endif
+                          @endforeach
+                        </select>
                       </div>
-                    </div>
-                    <div class="form-group row">
-                      <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                      </div>
-                    </div>
+                    </div>                    
                     <div class="form-group row">
                       <div class="offset-sm-2 col-sm-10">
                         <div class="checkbox">
                           <label>
-                            <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                          </label>
+                            <input type="checkbox" required> Data di atas sudah benar.</a>
+                          </label>                          
                         </div>
                       </div>
                     </div>
                     <div class="form-group row">
                       <div class="offset-sm-2 col-sm-10">
-                        <button type="submit" class="btn btn-danger">Submit</button>
+                        <button type="submit" class="btn btn-warning">Ubah</button>                        
                       </div>
                     </div>
                   </form>
                 </div>
                 <!-- /.tab-pane -->
+
+                <div class="tab-pane" id="settings">
+                  <form class="form-horizontal" action="/detail-murid/hapus/{{ $murid->id }}" method="post">
+                    @csrf
+                    <div class="form-group row">
+                      <label for="inputNis" class="col-sm-2 col-form-label">Hapus Murid ?</label>
+                      <div class="col-sm-10">
+                        <button class="btn btn-danger" type="submit">Hapus</button>
+                      </div>
+                    </div> 
+                  </form>
+                </div>
               </div>
               <!-- /.tab-content -->
             </div><!-- /.card-body -->
@@ -310,4 +317,5 @@
     </div>
   </div>
 
+  <!-- Menampilkan Hasil dari Range Tanggal --> 
 @endsection

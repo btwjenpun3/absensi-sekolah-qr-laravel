@@ -17,7 +17,7 @@ class KelasFactory extends Factory
     public function definition(): array
     {
         return [
-            'kelas' => $this->faker->unique()->randomElement(['X-IPA','X-IPS','XI-IPA','XI-IPS','XII-IPA','XII-IPS']),
+            'kelas' => 'X-IPA',
             'created_at' => now(),
             'updated_at' => now(),
         ];

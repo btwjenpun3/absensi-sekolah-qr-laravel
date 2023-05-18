@@ -60,7 +60,7 @@
                   @foreach ($kelas as $k)
                   <tr>                    
                     <td>{{ $nomorurut++; }}</td>                    
-                    <td>{{ $k->kelas }}</td>
+                    <td>{{ $k->kelas }}</td>                    
                     <td class="text-center">
                       <a href="/download-kartu-massal/{{ $k->id }}"><button class="btn btn-md btn-success">
                         <span>Download Kartu Massal</span>
@@ -68,7 +68,7 @@
                       <a href="/kelas/hapus/{{ $k->id }}"><button class="btn btn-md btn-danger">
                         <span>Hapus</span>
                       </button></a>
-                    </td>                                                                             
+                    </td>                                                                                               
                   </tr> 
                   @endforeach                                                      
                 </tbody>                
