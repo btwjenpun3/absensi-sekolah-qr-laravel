@@ -27,7 +27,7 @@
            with font-awesome or any other icon font library -->
       <li class="nav-item">
         <a href="/beranda" class="nav-link {{ ($title === 'Beranda') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <i class="bi bi-house-fill"></i>
           <p>
             Beranda           
           </p>
@@ -35,7 +35,7 @@
       </li>
       <li class="nav-item">
         <a href="/scan-qr" class="nav-link {{ ($title === 'Scan QR') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-qrcode"></i>
+          <i class="bi bi-qr-code-scan"></i>
           <p>
             Scan QR           
           </p>
@@ -43,10 +43,10 @@
       </li>     
       <li class="nav-item {{ ($title === 'Daftar Murid') ? 'menu-open' : '' }}{{ ($title === 'Input Murid') ? 'menu-open' : '' }}{{ ($title === 'Detail Murid') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}{{ ($title === 'Input Murid') ? 'active' : '' }}{{ ($title === 'Detail Murid') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-address-book"></i>
+          <i class="bi bi-people-fill"></i>
           <p>
             Murid
-            <i class="fas fa-angle-left right"></i>            
+            <i class="bi bi-caret-down-fill right"></i>            
           </p>
         </a>
         <ul class="nav nav-treeview">
@@ -62,35 +62,47 @@
           </li>                    
         </ul>
       </li>
-      <li class="nav-item {{ ($title === 'Data Kelas') ? 'menu-open' : '' }}{{ ($title === 'Data Tahun') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ ($title === 'Data Kelas') ? 'active' : '' }}{{ ($title === 'Data Tahun') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-book"></i>
+      <li class="nav-item {{ ($title === 'Daftar Kelas') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ ($title === 'Daftar Kelas') ? 'active' : '' }}">
+          <i class="bi bi-collection-fill"></i>
           <p>
-            Data Master
-            <i class="fas fa-angle-left right"></i>            
+            Kelas
+            <i class="bi bi-caret-down-fill right"></i>            
           </p>
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="/kelas" class="nav-link {{ ($title === 'Data Kelas') ? 'active' : '' }}">              
-              <p>Kelas</p>
+            <a href="/kelas/daftar" class="nav-link {{ ($title === 'Daftar Kelas') ? 'active' : '' }}">              
+              <p>Daftar Kelas</p>
             </a>
-          </li>
+          </li>                    
+        </ul>
+      </li>
+      <li class="nav-item {{ ($title === 'Data Kelas') ? 'menu-open' : '' }}{{ ($title === 'Data Tahun') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ ($title === 'Data Kelas') ? 'active' : '' }}{{ ($title === 'Data Tahun') ? 'active' : '' }}">
+          <i class="bi bi-card-heading"></i>
+          <p>
+            Tahun
+            <i class="bi bi-caret-down-fill right"></i>            
+          </p>
+        </a>
+        <ul class="nav nav-treeview">          
           <li class="nav-item">
             <a href="/tahun" class="nav-link {{ ($title === 'Data Tahun') ? 'active' : '' }}">              
-              <p>Tahun</p>
+              <p>Daftar Tahun</p>
             </a>
           </li>          
         </ul>
-      </li>                     
+      </li> 
+      <hr>
+      <div class="mt-4 ml-4">
+        <form action="/keluar" method="post"> 
+          @csrf        
+          <p>
+            <button class="btn btn-outline-danger" type="submit">Keluar</button>          
+          </p>               
+        </form> 
+      </div>                          
     </ul>      
 </nav>
-<div class="mt-4 ml-4 fixed-bottom">
-  <form action="/keluar" method="post"> 
-    @csrf        
-    <p>
-      <button class="btn btn-outline-danger" type="submit">Keluar</button>          
-    </p>               
-  </form> 
-</div>
 <!-- /.sidebar-menu -->

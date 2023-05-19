@@ -36,6 +36,7 @@ class AbsensiController extends Controller
     {       
         $data_nis = $request->absensi;
         $muridId = Murid::where('nis', $data_nis)->first()->id;
+        $kelasId = Murid::where('nis', $data_nis)->first()->kelas_id;
 
         // Verifikasi Absensi supaya tidak absensi 2x dalam 1 hari
         $ambilWaktu = Absensi::latest()->where('murid_id', $muridId)->first()->created_at ?? 0;
@@ -57,18 +58,25 @@ class AbsensiController extends Controller
         };         
         
         if($konversiWaktuHadir == $verifikasiWaktu){
-            return redirect('/scan-qr')->with('fail','');
+            // return redirect('/scan-qr')->with('fail','');
+            return response()->json(['message' => 'Absensi gagal.'], 400);
         }
         else {
-            $absensi = new Absensi;
-            $absensi->murid_id = $muridId;
-            $absensi->hari = $hariIni;
-            $absensi->tanggal = $tanggalHariIni;
-            $absensi->bulan = $bulanHariIni;
-            $absensi->jam_absen = $jamHariIni;
-            $absensi->status = $status;                 
-            $absensi->save();
-            return redirect('/scan-qr')->with('success','');
+            $data = [
+                'murid_id' => $muridId,
+                'kelas_id' => $kelasId,
+                'hari' => $hariIni,
+                'tanggal' => $tanggalHariIni,
+                'bulan' => $bulanHariIni,
+                'jam_absen' => $jamHariIni,
+                'status' => $status,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+            
+            Absensi::insert($data);
+            // return redirect('/scan-qr')->with('success','');
+            return response()->json(['message' => 'Absensi berhasil'], 200);
         };
     }
 
@@ -77,18 +85,19 @@ class AbsensiController extends Controller
         
         $today = Carbon::now()->toDateString();
 
-        $murid = Murid::pluck('id');
+        $data = Murid::all();       
 
         $hariIni = Carbon::now()->locale('id')->translatedFormat('l');
         $tanggalHariIni = Carbon::now()->translatedFormat('d'); 
         $jamHariIni = Carbon::now()->translatedFormat('H:i:s'); 
         $bulanHariIni = Carbon::now()->locale('id')->translatedFormat('F');
-
-        foreach($murid as $m){
-            $data = Absensi::where('murid_id', $m)->whereDate('created_at', $today)->get();
-            if($data->isEmpty()) {
+        
+        foreach($data as $d){
+            $dataAbsen = Absensi::where('murid_id', $d->id)->whereDate('created_at', $today)->get();
+            if($dataAbsen->isEmpty()) {
                 $absensi = new Absensi;
-                $absensi->murid_id = $m;
+                $absensi->murid_id = $d->id;
+                $absensi->kelas_id = $d->kelas_id;
                 $absensi->hari = $hariIni;
                 $absensi->tanggal = $tanggalHariIni;
                 $absensi->bulan = $bulanHariIni;

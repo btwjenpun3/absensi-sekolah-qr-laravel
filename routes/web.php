@@ -41,7 +41,7 @@ Route::get('/beranda', function () {
 Route::get('/scan-qr', [AbsensiController::class, 'index'])->middleware('auth');
 
 // Proses Scan QR
-Route::get('/scan-qr/{absensi}', [AbsensiController::class, 'store'])->middleware('auth');
+Route::get('/scan-qr/{absensi}', [AbsensiController::class, 'store']);
 
 // Proses Absensi Otomatis Ganti Hari
 Route::get('/auto-run', [AbsensiController::class, 'gantiHari']);
@@ -54,9 +54,12 @@ Route::post('/input-murid-proses', [MuridController::class, 'store'])->middlewar
 
 // Menuju Halaman Daftar Murid
 Route::get('/daftar-murid', [MuridController::class, 'index_daftar'])->middleware('auth');
+
+// Menuju Halaman Daftar Murid
+Route::get('/daftar-murid/json', [MuridController::class, 'data'])->middleware('auth');
       
 // Fungsi Hapus Murid
-Route::post('/detail-murid/hapus/{murid}', [MuridController::class, 'destroy'])->middleware('auth');
+Route::post('/detail-murid/hapus/{murid}', [MuridController::class, 'destroy']);
 
 // Menuju Halaman Detail Murid
 Route::get('/detail-murid/{murid}', [MuridController::class, 'show_detail']);
@@ -64,11 +67,20 @@ Route::get('/detail-murid/{murid}', [MuridController::class, 'show_detail']);
 // // Fungsi Menampilkan Absensi Dengan Range Tertentu
 // Route::post('/detail-murid/{id}', [AbsensiController::class, 'show_range'])->middleware('auth');
 
+// Menuju Halaman Daftar Kelas
+Route::get('/kelas/daftar', [KelasController::class, 'index'])->middleware('auth');
+
+// Menuju Halaman Detail Kelas
+Route::get('/kelas/daftar/{id}', [KelasController::class, 'index_detail'])->middleware('auth');
+
 // Menuju Halaman Data Master Kelas
-Route::get('/kelas', [KelasController::class, 'index'])->middleware('auth');
+Route::get('/kelas', [KelasController::class, 'index_master'])->middleware('auth');
     
 // Menyimpan Data Master Kelas
 Route::post('/kelas-proses', [KelasController::class, 'store']);
+
+// Hapus Kelas
+Route::get('/kelas/hapus/{id}', [KelasController::class, 'destroy']);
 
 // Menuju Halaman Data Master Tahun
 Route::get('/tahun', [TahunController::class, 'index'])->middleware('auth');  

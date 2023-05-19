@@ -53,8 +53,9 @@ class MuridController extends Controller
         $tahun_id = Tahun::where('tahun', $request->tahun)->first()->id;
 
         $validasi = $request->validate([
-            'nis' => 'required|unique:murids|max:255',
-            'nama' => 'required|min:3|max:255'            
+            'nis' => 'required|integer|unique:murids',
+            'nama' => 'required|min:3|max:255',
+            'kelas' => 'required'            
         ]);
 
         $validasi['kelas_id'] = $kelas_id;
@@ -113,8 +114,18 @@ class MuridController extends Controller
         $getId = $request->murid;
 
         // Hapus data Murid sesuai dengan id-nya
-        Murid::where('id', $getId)->delete(); 
+        $validasi = $request->validate([
+            'captcha' => 'required|captcha'
+        ]);
         
-        return redirect('/daftar-murid')->with('deleted', 'Data Murid berhasil di hapus.');    
+            if ($validasi) {  
+                Murid::where('id', $getId)->delete();         
+                return redirect('/daftar-murid')->with('deleted', 'Data Murid berhasil di hapus!.');              
+            } 
+            
+            return redirect('/detail-murid/'.$getId)->with('fail', '');
+
+            
+           
     }
 }

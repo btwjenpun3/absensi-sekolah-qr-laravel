@@ -48,9 +48,13 @@
                   <td>{{ $m->nis }}
                   </td>
                   <td>{{ $m->nama }}</td>
+                  @if(empty($m->kelas->kelas))
+                  <td><i class="text-danger">Kelas tidak di temukan.</i></td>
+                  @else
                   <td>{{ $m->kelas->kelas }}</td>
+                  @endif
                   <td>{{ $m->tahun->tahun }}</td>
-                  <td class="text-center"><a href="/detail-murid/{{ $m->id }}"><button type="submit" class="btn btn-success">
+                  <td class="text-center"><a href="/detail-murid/{{ $m->id }}"><button type="submit" class="btn btn-primary">
                         <span>Detail</span>
                       </button></a>
                   </td>
