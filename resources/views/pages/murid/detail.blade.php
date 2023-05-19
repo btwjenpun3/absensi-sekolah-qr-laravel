@@ -16,7 +16,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-3">
-
+          @if(session()->has('fail'))
+          Gagal!
+          @endif          
           <!-- Profile Image -->
           <div class="card card-primary card-outline">
             <div class="card-body box-profile">
@@ -224,16 +226,13 @@
                 </div>
                 <!-- /.tab-pane -->
 
-                <div class="tab-pane" id="settings">
-                  <form class="form-horizontal" action="/detail-murid/hapus/{{ $murid->id }}" method="post">
-                    @csrf
+                <div class="tab-pane" id="settings">                  
                     <div class="form-group row">
                       <label for="inputNis" class="col-sm-2 col-form-label">Hapus Murid ?</label>
                       <div class="col-sm-10">
-                        <button class="btn btn-danger" type="submit">Hapus</button>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalLoginForm">Hapus</button>
                       </div>
-                    </div> 
-                  </form>
+                    </div>                   
                 </div>
               </div>
               <!-- /.tab-content -->
@@ -316,6 +315,34 @@
       </div>
     </div>
   </div>
-
   <!-- Menampilkan Hasil dari Range Tanggal --> 
+
+  <!-- Pop Up Form Hapus Murid -->
+  <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold text-danger">Hapus Murid</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/detail-murid/hapus/{{ $murid->id }}" method="post">  
+        @csrf    
+        <div class="modal-body mx-3">
+          <div class="md-form mb-0">
+            <p class="text-danger"><i>Perhatian! Menghapus data siswa tidak dapat di undur! Apabila kamu sudah mengisi Absensi dengan data siswa ini sebelumnya, maka data absensi untuk siwa ini akan hilang permanen! Apabila kamu sudah mengerti tentang resiko ini, maka silahkan isi Captcha di bawah dan klik Submit.</i></p>
+            <hr>
+            {!! captcha_img() !!}
+            <span><input type="text" name="captcha" placeholder="Masukkan captcha" required></span>      
+          </div>        
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-danger">Saya Yakin!</button>
+        </div>
+        </form>
+      </div>
+    </div>
+    </div>
 @endsection
+

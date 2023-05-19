@@ -1,12 +1,12 @@
 @extends('layouts/main')
 
 <!-- DataTables -->
-<link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
 @section('breadcrumb')
-    <li class="breadcrumb-item"><a href="/beranda">Beranda</a> / Data Master / Kelas</li> 
+    <li class="breadcrumb-item"><a href="/beranda">Beranda</a> / Kelas / Daftar Kelas</li> 
 @endsection 
 
 @section('content')
@@ -61,13 +61,10 @@
                   <tr>                    
                     <td>{{ $nomorurut++; }}</td>                    
                     <td>{{ $k->kelas }}</td>                    
-                    <td class="text-center">
-                      <a href="/download-kartu-massal/{{ $k->id }}"><button class="btn btn-md btn-success">
-                        <span>Download Kartu Massal</span>
-                      </button></a>
-                      <a href="/kelas/hapus/{{ $k->id }}"><button class="btn btn-md btn-danger">
-                        <span>Hapus</span>
-                      </button></a>
+                    <td class="text-center">                      
+                      <a href="/kelas/daftar/{{ $k->id }}"><button class="btn btn-md btn-primary">
+                        <span>Detail</span>
+                      </button></a>                      
                     </td>                                                                                               
                   </tr> 
                   @endforeach                                                      

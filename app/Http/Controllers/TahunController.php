@@ -9,7 +9,7 @@ class TahunController extends Controller
 {
     public function index()
     {
-        $tahun = Tahun::all();
+        $tahun = Tahun::orderBy('tahun')->get();
         return view('pages/master/tahun', [
             "title" => "Data Tahun",
             "titlepage" => "Data Tahun",

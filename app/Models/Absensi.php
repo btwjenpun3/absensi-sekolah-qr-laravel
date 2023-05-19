@@ -15,5 +15,10 @@ class Absensi extends Model
     {
         return $this->belongsTo(Murid::class);
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
    
 }

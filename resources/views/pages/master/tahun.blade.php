@@ -28,7 +28,7 @@
               <div class="card-tools">
                 <div class="input-group input-group-sm" style="width: 100px;"> 
                   <div class="input-group-append">
-                    <a href="" data-toggle="modal" data-target="#modalLoginForm"><button class="btn-sm btn-success">
+                    <a href="#" data-toggle="modal" data-target="#modalLoginForm"><button class="btn-sm btn-success">
                       <span>Tambah Data</span>
                     </button></a>
                   </div>
