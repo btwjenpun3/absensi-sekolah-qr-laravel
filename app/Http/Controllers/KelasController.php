@@ -34,7 +34,7 @@ class KelasController extends Controller
         $verifikasiTanggalHariIni = Carbon::now()->format('Y-m-d');
 
         $kelas = Kelas::where('id', $request->id)->first(); 
-        $murid = Murid::where('kelas_id', $request->id)->orderBy('nama')->get();        
+        $murid = Murid::with(['kelas', 'tahun'])->where('kelas_id', $request->id)->orderBy('nama')->get();        
         
         return view('pages/kelas/detail', [
             "title" => "Detail Kelas $kelas->kelas",
@@ -48,15 +48,15 @@ class KelasController extends Controller
         ]);
     }
 
-    public function index_master(Kelas $kelas)
-    {
-        $kelas = Kelas::orderBy('kelas')->get(); 
-        return view('pages/master/kelas', [
-            "title" => "Data Kelas",
-            "titlepage" => "Data Kelas",
-            "kelas" => $kelas            
-        ]);
-    }
+    // public function index_master(Kelas $kelas)
+    // {
+    //     $kelas = Kelas::orderBy('kelas')->get(); 
+    //     return view('pages/master/kelas', [
+    //         "title" => "Data Kelas",
+    //         "titlepage" => "Data Kelas",
+    //         "kelas" => $kelas            
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -77,7 +77,7 @@ class KelasController extends Controller
 
         Kelas::create($validasi);
         
-        return redirect('/kelas')->with('success','');
+        return redirect('/kelas/daftar')->with('success','');
     }
 
     /**
@@ -112,8 +112,18 @@ class KelasController extends Controller
         $getId = $request->id;
 
         // Hapus data Murid sesuai dengan id-nya
-        Kelas::where('id', $getId)->delete(); 
-        
-        return redirect('/kelas')->with('deleted', 'Kelas berhasil di hapus.');
+        $validasi = $request->validate([
+            'captcha' => 'required|captcha'
+        ]);
+            if($validasi)
+            {
+                Kelas::where('id', $getId)->delete(); 
+            
+                return redirect('/kelas/daftar')->with('deleted', '');            
+            }
+
+            else {
+                return redirect('/kelas/daftar/'.$getId)->with('fail', 'Kelas gagal di hapus.');
+            }        
     }
 }

@@ -79,7 +79,7 @@
               <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Absensi</a></li>                
                 <li class="nav-item"><a class="nav-link" href="#profile" data-toggle="tab">Profil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Alat</a></li>
+                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Manage</a></li>
               </ul>
             </div><!-- /.card-header -->
             <div class="card-body">
@@ -121,25 +121,25 @@
                               <tbody>
                               @foreach ($absensi as $a)                                   
                               <tr>
-                                @if($a->status == '0')
+                                @if($a->status == '0') <!-- Tidak Masuk -->
                                   <td class="table-danger">{{ $a->hari }}</td>
                                   <td class="table-danger">{{ $a->tanggal }}</td> 
                                   <td class="table-danger">{{ $a->bulan }}</td>                                 
                                   <td class="table-danger">{{ $a->jam_absen }} WIB</td>
                                   <td class="text-center table-danger"><img src="/img/fail.png" width="20px" height="20px"></td>
-                                @elseif($a->status == '1')
+                                @elseif($a->status == '1') <!-- Masuk -->
                                   <td class="table-success">{{ $a->hari }}</td>
                                   <td class="table-success">{{ $a->tanggal }}</td>
                                   <td class="table-success">{{ $a->bulan }}</td>                                  
                                   <td class="table-success">{{ $a->jam_absen }} WIB</td>
                                   <td class="text-center table-success"><img src="/img/success.png" width="20px" height="20px"></td>
-                                @elseif($a->status == '2')
+                                @elseif($a->status == '2') <!-- Terlambat -->
                                   <td class="table-warning">{{ $a->hari }}</td>
                                   <td class="table-warning">{{ $a->tanggal }}</td>  
                                   <td class="table-warning">{{ $a->bulan }}</td>                                
                                   <td class="table-warning">{{ $a->jam_absen }} WIB</td>
                                   <td class="text-center table-warning">Terlambat</td>
-                                @elseif($a->status == '3')
+                                @elseif($a->status == '3') <!-- Izin -->
                                   <td class="table-secondary">{{ $a->hari }}</td>
                                   <td class="table-secondary">{{ $a->tanggal }}</td>
                                   <td class="table-secondary">{{ $a->bulan }}</td>                                   
@@ -331,6 +331,7 @@
         @csrf    
         <div class="modal-body mx-3">
           <div class="md-form mb-0">
+            <p class="text-danger">Hapus : <b>{{ $murid->nama }}</b></p>
             <p class="text-danger"><i>Perhatian! Menghapus data siswa tidak dapat di undur! Apabila kamu sudah mengisi Absensi dengan data siswa ini sebelumnya, maka data absensi untuk siwa ini akan hilang permanen! Apabila kamu sudah mengerti tentang resiko ini, maka silahkan isi Captcha di bawah dan klik Submit.</i></p>
             <hr>
             {!! captcha_img() !!}

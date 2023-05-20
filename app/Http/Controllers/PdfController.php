@@ -43,7 +43,7 @@ class PdfController extends Controller
             return view('/kelas');
         }
         else {
-            return redirect('/kelas')->with('fail','');
+            return redirect('/kelas/daftar')->with('fail_qr','');
         }    
     }    
     

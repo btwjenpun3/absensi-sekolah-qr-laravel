@@ -22,9 +22,14 @@
             Data Kelas Berhasil di Tambahkan.
           </div>
           @endif
-          @if(session()->has('fail'))                             
+          @if(session()->has('deleted'))                             
           <div class="alert alert-danger" role="alert">
-            Tidak ada murid di kelas tersebut!
+            Kelas berhasil di hapus!
+          </div>
+          @endif
+          @if(session()->has('fail_qr'))                             
+          <div class="alert alert-danger" role="alert">
+            Tidak ada murid di kelas tersebut!.
           </div>
           @endif
           @error('kelas')

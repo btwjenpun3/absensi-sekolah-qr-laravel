@@ -7,6 +7,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\TahunController;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PengaturanController;
 
 
 /*
@@ -30,12 +32,7 @@ Route::post('/', [LoginController::class, 'authenticate']);
 Route::post('/keluar', [LoginController::class, 'logout']); 
 
 // Menuju Halaman Beranda
-Route::get('/beranda', function () {
-    return view('pages/beranda', [
-        "title" => "Beranda",
-        "titlepage" => "Beranda"
-    ]);
-})->middleware('auth');
+Route::get('/beranda', [DashboardController::class, 'index'])->middleware('auth');
 
 // Menuju Halaman Scan QR
 Route::get('/scan-qr', [AbsensiController::class, 'index'])->middleware('auth');
@@ -80,7 +77,7 @@ Route::get('/kelas', [KelasController::class, 'index_master'])->middleware('auth
 Route::post('/kelas-proses', [KelasController::class, 'store']);
 
 // Hapus Kelas
-Route::get('/kelas/hapus/{id}', [KelasController::class, 'destroy']);
+Route::post('/kelas/hapus/{id}', [KelasController::class, 'destroy']);
 
 // Menuju Halaman Data Master Tahun
 Route::get('/tahun', [TahunController::class, 'index'])->middleware('auth');  
@@ -93,5 +90,8 @@ Route::get('/download-kartu-satuan/{murid:id}', [PdfController::class, 'download
 
 // Untuk mendownload kartu absen siswa secara massal per-kelas
 Route::get('/download-kartu-massal/{kelas:id}', [PdfController::class, 'downloadKartuMassal'])->middleware('auth');
+
+// Halaman Pengaturan
+Route::get('/pengaturan', [PengaturanController::class, 'show'])->middleware('auth');
 
 
