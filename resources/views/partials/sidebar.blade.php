@@ -2,10 +2,10 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        <img src="/img/logo-sekolah.png" class="img-circle elevation-2" alt="Logo Sekolah">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block">SMAN 1 Ungaran</a>
       </div>
     </div>
 
@@ -28,7 +28,7 @@
       <li class="nav-item">
         <a href="/beranda" class="nav-link {{ ($title === 'Beranda') ? 'active' : '' }}">
           <i class="bi bi-house-fill"></i>
-          <p>
+          <p class="pl-1">
             Beranda           
           </p>
         </a>        
@@ -36,7 +36,7 @@
       <li class="nav-item">
         <a href="/scan-qr" class="nav-link {{ ($title === 'Scan QR') ? 'active' : '' }}">
           <i class="bi bi-qr-code-scan"></i>
-          <p>
+          <p class="pl-1">
             Scan QR           
           </p>
         </a>        
@@ -44,7 +44,7 @@
       <li class="nav-item {{ ($title === 'Daftar Murid') ? 'menu-open' : '' }}{{ ($title === 'Input Murid') ? 'menu-open' : '' }}{{ ($title === 'Detail Murid') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ ($title === 'Daftar Murid') ? 'active' : '' }}{{ ($title === 'Input Murid') ? 'active' : '' }}{{ ($title === 'Detail Murid') ? 'active' : '' }}">
           <i class="bi bi-people-fill"></i>
-          <p>
+          <p class="pl-1">
             Murid
             <i class="bi bi-caret-down-fill right"></i>            
           </p>
@@ -65,7 +65,7 @@
       <li class="nav-item {{ ($title === 'Daftar Kelas') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ ($title === 'Daftar Kelas') ? 'active' : '' }}">
           <i class="bi bi-collection-fill"></i>
-          <p>
+          <p class="pl-1">
             Kelas
             <i class="bi bi-caret-down-fill right"></i>            
           </p>
@@ -81,7 +81,7 @@
       <li class="nav-item {{ ($title === 'Data Kelas') ? 'menu-open' : '' }}{{ ($title === 'Data Tahun') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ ($title === 'Data Kelas') ? 'active' : '' }}{{ ($title === 'Data Tahun') ? 'active' : '' }}">
           <i class="bi bi-card-heading"></i>
-          <p>
+          <p class="pl-1">
             Tahun
             <i class="bi bi-caret-down-fill right"></i>            
           </p>
@@ -94,6 +94,14 @@
           </li>          
         </ul>
       </li> 
+      <li class="nav-item">
+        <a href="/pengaturan" class="nav-link {{ ($title === 'Pengaturan') ? 'active' : '' }}">
+          <i class="bi bi-gear-fill"></i>
+          <p class="pl-1">
+            Pengaturan           
+          </p>
+        </a>        
+      </li>
       <hr>
       <div class="mt-4 ml-4">
         <form action="/keluar" method="post"> 

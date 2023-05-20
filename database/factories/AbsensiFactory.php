@@ -18,6 +18,7 @@ class AbsensiFactory extends Factory
     {
         return [
             'murid_id' => $this->faker->numberBetween(1,10),
+            'kelas_id' => 1,
             'hari' => $this->faker->dayOfWeek(),
             'tanggal' => $this->faker->date('d'),
             'bulan' => $this->faker->date('m'),

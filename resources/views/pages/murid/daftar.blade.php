@@ -12,7 +12,7 @@
 @section('content')
 <!-- Main content -->
 <!-- Main content -->
-<section class="content">
+<section class="content pb-5">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">         
@@ -27,7 +27,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">              
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="example1" class="table table-bordered table-striped table-hover">
                 <thead>
                 <tr>
                   <th>No</th>
@@ -51,7 +51,7 @@
                   @if(empty($m->kelas->kelas))
                   <td><i class="text-danger">Kelas tidak di temukan.</i></td>
                   @else
-                  <td>{{ $m->kelas->kelas }}</td>
+                  <td><a href="/kelas/daftar/{{ $m->kelas_id }}">{{ $m->kelas->kelas }}</a></td>
                   @endif
                   <td>{{ $m->tahun->tahun }}</td>
                   <td class="text-center"><a href="/detail-murid/{{ $m->id }}"><button type="submit" class="btn btn-primary">

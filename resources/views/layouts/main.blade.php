@@ -37,7 +37,7 @@
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <!-- Top Menu -->
-    @include('partials/topmenu')
+    @include('/partials/topmenu')
     <!-- Top Menu -->
 
     <!-- Right navbar links -->
@@ -81,7 +81,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="/img/AdminLTELogo.png" alt="Logo Sekolah" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">MyAbsen</span>
     </a>
 
@@ -92,7 +92,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="background-color: white;">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
@@ -115,9 +115,10 @@
 
   </div>
   
+  
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="https://adminlte.io">Putra IT</a>.</strong>
+  <footer class="main-footer fixed-bottom">
+    <strong>Copyright &copy; 2023 <a href="#">Putra IT</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0
@@ -139,6 +140,8 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <!-- Bootstrap 4 -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 {{-- <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -199,7 +202,47 @@
         "autoWidth": false,
         "responsive": true,
       })
-      .buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+     
+      $('#berandaMasuk').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+      })
+     
+      $('#berandaTerlambat').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+      })
+      
+      $('#berandaIjin').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+      })
+
+      $('#daftarTahun').DataTable({
+        "paging": false,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
+        "responsive": true,
+      })
+      
       $('#absensiKelas').DataTable({
         "paging": true,
         "lengthChange": false,
