@@ -6,7 +6,6 @@ use App\Models\Absensi;
 use App\Models\Murid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use Carbon\CarbonInterface;
 
 class AbsensiController extends Controller
 {
@@ -15,6 +14,7 @@ class AbsensiController extends Controller
      */
     public function index()
     {
+        
         return view('pages/scan', [
             "title" => "Scan QR",
             "titlepage" => "Scan QR"
@@ -35,7 +35,13 @@ class AbsensiController extends Controller
     public function store(Request $request)
     {       
         $data_nis = $request->absensi;
-        $muridId = Murid::where('nis', $data_nis)->first()->id;
+        $muridId = Murid::where('nis', $data_nis)->first()->id ?? 0;
+
+        if($muridId === 0)
+        {
+            return response()->json(['message' => 'Terjadi Kesalahan : Murid tidak di temukan.'], 400);
+        };
+
         $kelasId = Murid::where('nis', $data_nis)->first()->kelas_id;
 
         // Verifikasi Absensi supaya tidak absensi 2x dalam 1 hari
@@ -59,7 +65,7 @@ class AbsensiController extends Controller
         
         if($konversiWaktuHadir == $verifikasiWaktu){
             // return redirect('/scan-qr')->with('fail','');
-            return response()->json(['message' => 'Absensi gagal.'], 400);
+            return response()->json(['message' => 'Terjadi Kesalahan : Murid sudah melakukan Absen.'], 400);
         }
         else {
             $data = [
@@ -76,7 +82,7 @@ class AbsensiController extends Controller
             
             Absensi::insert($data);
             // return redirect('/scan-qr')->with('success','');
-            return response()->json(['message' => 'Absensi berhasil'], 200);
+            return response()->json(['message' => 'Absensi berhasil. Silahkan masuk ke kelas.'], 200);
         };
     }
 
@@ -102,7 +108,12 @@ class AbsensiController extends Controller
                 $absensi->tanggal = $tanggalHariIni;
                 $absensi->bulan = $bulanHariIni;
                 $absensi->jam_absen = $jamHariIni;
-                $absensi->status = 0;                 
+                if($hariIni == 'Minggu'){
+                    $absensi->status = 4;
+                }
+                else {
+                    $absensi->status = 0; 
+                }                                
                 $absensi->save();                
             }
             else 

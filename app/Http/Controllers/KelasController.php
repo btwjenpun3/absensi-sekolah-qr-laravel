@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\Murid;
 use App\Models\Absensi;
-use Carbon\CarbonInterface;
+use App\Models\IsAdmin;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+
 
 class KelasController extends Controller
 {
@@ -15,7 +16,13 @@ class KelasController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden  
+        
         $kelas = Kelas::orderBy('kelas')->get(); 
         return view('pages/kelas/daftar', [
             "title" => "Daftar Kelas",
@@ -26,6 +33,12 @@ class KelasController extends Controller
 
     public function index_detail(Request $request)
     {
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden    
+
         $tanggalHariIni = Carbon::now()->format('d-m-Y');
         $hariIni = Carbon::now()->translatedFormat('l');
 
@@ -71,6 +84,12 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+
         $validasi = $request->validate([
             'kelas' => 'required|unique:kelas'
         ]);
@@ -109,6 +128,12 @@ class KelasController extends Controller
      */
     public function destroy(Kelas $kelas, Request $request)
     {
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+        
         $getId = $request->id;
 
         // Hapus data Murid sesuai dengan id-nya

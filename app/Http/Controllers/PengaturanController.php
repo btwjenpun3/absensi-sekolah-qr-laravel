@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\IsAdmin;
 
 use Illuminate\Http\Request;
 
@@ -27,6 +28,12 @@ class PengaturanController extends Controller
      */
     public function show()
     {
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+        
         return view('/pages/pengaturan', [
             "title" => "Pengaturan",
             "titlepage" => "Pengaturan"
