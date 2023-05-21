@@ -40,6 +40,12 @@ Route::get('/scan-qr', [AbsensiController::class, 'index'])->middleware('auth');
 // Proses Scan QR
 Route::get('/scan-qr/{absensi}', [AbsensiController::class, 'store']);
 
+// Halaman Standalone-Scan
+Route::get('/scan-qr-standalone', function() {
+    
+    return view('/pages/scan-standalone');
+});
+
 // Proses Absensi Otomatis Ganti Hari
 Route::get('/auto-run', [AbsensiController::class, 'gantiHari']);
 

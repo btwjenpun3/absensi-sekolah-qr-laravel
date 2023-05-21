@@ -7,12 +7,18 @@ use App\Models\Murid;
 use App\Models\Kelas;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use App\Models\IsAdmin;
 class PdfController extends Controller
 {
 
     public function downloadKartuSatuan(Murid $murid)
     {         
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+
         $pdf = PDF::loadView('/pages/murid/kartu-s', [
             'data' => $murid,
             "qr" => QrCode::size(80)->generate($murid->nis)
@@ -22,7 +28,13 @@ class PdfController extends Controller
 
     
     public function downloadKartuMassal(Murid $murid, Kelas $kelas)
-    {         
+    {        
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+
         $murid = Murid::where('kelas_id', $kelas->id)->get();        
 
         if(count($murid) > 0) {

@@ -6,6 +6,7 @@ use App\Models\Murid;
 use App\Models\Absensi;
 use App\Models\Kelas;
 use App\Models\Tahun;
+use App\Models\IsAdmin;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,12 @@ class MuridController extends Controller
      */
     public function index_input()
     {        
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+
         $kelas = Kelas::orderBy('kelas')->get();
         $tahun = Tahun::orderBy('tahun')->get();
         return view('pages/murid/input', [            
@@ -28,6 +35,12 @@ class MuridController extends Controller
 
     public function index_daftar()
     {
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+
         $murid = Murid::with(['kelas','tahun'])->get();
         return view('pages/murid/daftar', [            
             "title" => "Daftar Murid",
@@ -49,6 +62,12 @@ class MuridController extends Controller
      */
     public function store(Request $request)
     {
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+
         $kelas_id = Kelas::where('kelas', $request->kelas)->first()->id;
         $tahun_id = Tahun::where('tahun', $request->tahun)->first()->id;
 
@@ -76,6 +95,12 @@ class MuridController extends Controller
 
     public function show_detail(Murid $murid)
     {
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+
         $kelas = Kelas::get('kelas');
         $tahun = Tahun::get('tahun');
         return view('pages/murid/detail', [
@@ -111,6 +136,12 @@ class MuridController extends Controller
      */
     public function destroy(Request $request)
     {
+        // Verifikasi untuk User yang login apakah dia Admin
+            $verifikasiAdmin = new IsAdmin();
+            $verifikasiAdmin->isAdmin(); 
+        // Jika status=1, maka akan lanjut kode di bawah
+        // Jika status != 1, maka akan 403 Forbidden
+        
         $getId = $request->murid;
 
         // Hapus data Murid sesuai dengan id-nya
