@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GpsController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
@@ -99,5 +100,11 @@ Route::get('/download-kartu-massal/{kelas:id}', [PdfController::class, 'download
 
 // Halaman Pengaturan
 Route::get('/pengaturan', [PengaturanController::class, 'show'])->middleware('auth');
+
+// Halaman Pengaturan
+Route::post('/pengaturan', [PengaturanController::class, 'update'])->middleware('auth');
+
+// Halaman GPS
+Route::get('/gps', [GpsController::class, 'index'])->middleware('auth');
 
 

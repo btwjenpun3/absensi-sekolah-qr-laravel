@@ -68,7 +68,7 @@
                                             <td>{{ $k->kelas }}</td>
                                             <td class="text-center">
                                                 <a href="/kelas/daftar/{{ $k->id }}"><button
-                                                        class="btn btn-md btn-info">
+                                                        class="btn btn-sm btn-info">
                                                         <span>Detail</span>
                                                     </button></a>
                                             </td>

@@ -52,7 +52,7 @@
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $t->tahun }}</td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-info dropdown-toggle"
+                                                <button type="button" class="btn btn-sm btn-info dropdown-toggle"
                                                     data-toggle="dropdown">
                                                     Manage
                                                 </button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\IsAdmin;
+use App\Models\Pengaturan;
 
 use Illuminate\Http\Request;
 
@@ -34,9 +35,12 @@ class PengaturanController extends Controller
         // Jika status=1, maka akan lanjut kode di bawah
         // Jika status != 1, maka akan 403 Forbidden
         
+        $data = Pengaturan::get()->first() ?? "0";
+
         return view('/pages/pengaturan', [
             "title" => "Pengaturan",
-            "titlepage" => "Pengaturan"
+            "titlepage" => "Pengaturan",
+            "data" => $data
         ]);
     }
 
@@ -53,7 +57,15 @@ class PengaturanController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $validasi = $request->validate([
+            'nama_sekolah' => 'required',
+            'jam_masuk' => 'required',
+            'logo' => 'required'
+        ]);
+
+        Pengaturan::create($validasi);
+
+        return redirect('/pengaturan')->with('success');
     }
 
     /**
