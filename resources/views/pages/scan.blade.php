@@ -13,9 +13,6 @@
                 <div class="col-lg-6">
                     <!-- Pesan Berhasil / Error saat proses scan QR -->
 
-                    <div id="messageContainer" class="alert alert-primary alert-dismissible fade show" role="alert"
-                        data-tor="show:scale.from(0)"></div>
-
                     <div class="card">
                         <div class="card-header">
                             <h5 class="m-0">Menu Scan QR</h5>
